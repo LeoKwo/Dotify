@@ -1,10 +1,11 @@
 package com.example.dotify
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import org.w3c.dom.Text
+import androidx.appcompat.app.AppCompatActivity
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private val lowBound: Int = 10
@@ -23,6 +24,8 @@ class MainActivity : AppCompatActivity() {
         val newUsername = findViewById<EditText>(R.id.etUserName)
         val changeUsername = findViewById<Button>(R.id.btChangeUser)
 
+        val ivAlbum = findViewById<ImageView>(R.id.ivAlbumArt)
+
         newUsername.visibility = View.INVISIBLE
 
         prev.setOnClickListener {preOnClick()}
@@ -34,6 +37,9 @@ class MainActivity : AppCompatActivity() {
         next.setOnClickListener {nextOnClick()}
 
         changeUsername.setOnClickListener {changeOnClick(changeUsername, newUsername, username)}
+
+        val rnd = Random()
+        ivAlbum.setOnLongClickListener {aaLongPress(songCount, rnd)}
     }
 
     private fun preOnClick() {
@@ -63,5 +69,11 @@ class MainActivity : AppCompatActivity() {
                 username.visibility = View.VISIBLE
             }
         }
+    }
+
+    private fun aaLongPress(song: TextView, rnd: Random):Boolean {
+        val color = Color.argb(255, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256))
+        song.setTextColor(color)
+        return true
     }
 }
