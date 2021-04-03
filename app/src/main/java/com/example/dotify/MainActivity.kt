@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val prev = findViewById<ImageButton>(R.id.ibPrev)
+        val next = findViewById<ImageButton>(R.id.ibNext)
         val play = findViewById<ImageButton>(R.id.ibPlay)
         val songCount = findViewById<TextView>(R.id.tvSongsPlayed)
 
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         songCount.text = rndPlay.toString()
         play.setOnClickListener {playOnClick(songCount)}
 
-        prev.setOnClickListener {nextOnClick()}
+        next.setOnClickListener {nextOnClick()}
 
         changeUsername.setOnClickListener {changeOnClick(changeUsername, newUsername, username)}
     }
@@ -49,13 +50,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeOnClick(change: Button, new: EditText, username: TextView) {
         if (change.text == "Change User") {
-            change.text = "Done"
+            change.text = "Apply"
             new.visibility = View.VISIBLE
             username.visibility = View.INVISIBLE
         } else {
-            change.text = "Change User"
-            new.visibility = View.INVISIBLE
-            username.visibility = View.VISIBLE
+            if (new.text.toString() == "") {
+                Toast.makeText(this, "You need to enter a username!", Toast.LENGTH_LONG).show()
+            } else {
+                change.text = "Change User"
+                new.visibility = View.INVISIBLE
+                username.text = new.text
+                username.visibility = View.VISIBLE
+            }
         }
     }
 }
