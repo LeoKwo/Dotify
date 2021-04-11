@@ -10,10 +10,11 @@
         android:id="@+id/ivAlbumArt"
         android:layout_width="@dimen/album_art_size"
         android:layout_height="@dimen/album_art_size"
-        app:srcCompat="@drawable/Welcome_Horizons"
+        app:srcCompat="@drawable/welcome_horizons"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clUser"
+        android:layout_marginTop="@dimen/album_art_margin"
         />
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +22,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/clUser"
         app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginLeft="@dimen/user_bar_margin"
+        android:layout_marginRight="@dimen/user_bar_margin"
+        android:layout_marginTop="@dimen/user_bar_margin"
         >
 
         <TextView
