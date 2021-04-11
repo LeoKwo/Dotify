@@ -5,4 +5,5 @@
     <dimen name="play_button_size">100dp</dimen>
     <dimen name="user_bar_margin">10dp</dimen>
     <dimen name="album_art_margin">20dp</dimen>
+    <dimen name="song_info_padding">10dp</dimen>
 </resources>
