@@ -12,4 +12,4 @@ This app is a mockup music player. It randomlly generates a number of songs play
   - ![Barrier](img/barrier.jpg)
 
 **Running in the emulator...**
-![demo](img/demo.jpg)
+![demo](img/in_sim.jpg)
