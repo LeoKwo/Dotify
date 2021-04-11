@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    private val lowBound: Int = 10
-    private val highBound: Int = 1000
+    private val lowBound: Int = 100
+    private val highBound: Int = 10000
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
