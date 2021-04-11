@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/ivAlbumArt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="@drawable/strangers_cover_art"
+        android:layout_width="@dimen/album_art_size"
+        android:layout_height="@dimen/album_art_size"
+        app:srcCompat="@drawable/Welcome_Horizons"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clUser"
@@ -27,7 +27,7 @@
             android:id="@+id/tvUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username"
+            android:text="@string/default_username"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBaseline_toBaselineOf="@id/btChangeUser"
             />
@@ -36,7 +36,7 @@
             android:id="@+id/etUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="New Username"
+            android:hint="@string/new_user"
             android:inputType="text"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintBaseline_toBaselineOf="@id/btChangeUser"
@@ -46,7 +46,7 @@
             android:id="@+id/btChangeUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Change User"
+            android:text="@string/change_user"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -62,8 +62,8 @@
             android:id="@+id/tvSongName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Animal Crossing: New Horizons"
-            android:textSize="36dp"
+            android:text="@string/song_name"
+            android:textSize="@dimen/song_title_size"
             android:textAlignment="center"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -75,7 +75,7 @@
             android:id="@+id/tvArtistName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Leo Leo Leo Leo Leo Leo Leo Leo Leo Leo Leo Leo Leo Leo Leo Leo"
+            android:text="@string/artist_name"
             android:singleLine="true"
             app:layout_constraintTop_toBottomOf="@id/tvSongName"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -86,7 +86,7 @@
             android:id="@+id/tvSongsPlayed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1234"
+            android:text="@string/default_play_count"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/tvArtistName"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -113,18 +113,21 @@
             app:layout_constraintRight_toLeftOf="@id/ibPlay"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:tint="@color/purple_500"
             />
 
         <ImageButton
             android:id="@+id/ibPlay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_play"
+            android:layout_width="@dimen/play_button_size"
+            android:layout_height="@dimen/play_button_size"
+            app:srcCompat="@drawable/ic_play_2"
             android:background="@null"
             app:layout_constraintLeft_toRightOf="@id/ibPrev"
             app:layout_constraintRight_toLeftOf="@id/ibNext"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:tint="@color/purple_500"
+            android:scaleType="fitCenter"
             />
 
         <ImageButton
@@ -137,6 +140,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:tint="@color/purple_500"
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

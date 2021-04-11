@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Dotify</string>
+    <string name="default_username">Nintendo</string>
+    <string name="default_play_count">1234</string>
+    <string name="song_name">Welcome Horizons</string>
+    <string name="artist_name">K.K.</string>
+    <string name="change_user">Change User</string>
+    <string name="new_user">Enter New Username</string>
+    <string name="apply_username">Apply</string>
 </resources>
