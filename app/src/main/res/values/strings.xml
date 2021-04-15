@@ -7,4 +7,6 @@
     <string name="change_user">Change User</string>
     <string name="new_user">Enter New Username</string>
     <string name="apply_username">Apply</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="song_info_format">%s - %s</string>
 </resources>

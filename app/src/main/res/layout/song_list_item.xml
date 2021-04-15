@@ -3,16 +3,16 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="10dp">
+    android:padding="10dp"
+    android:id="@+id/clSongListItem">
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivAlbumArtSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/crazyinlove_small"
-        android:padding="10dp"
+        android:padding="5dp"
         />
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
@@ -20,12 +20,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toRightOf="@id/ivAlbumArtSmall"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="10dp"
+        >
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvListSongName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="yes"
             android:textSize="24sp"
             />
 
@@ -33,7 +34,6 @@
             android:id="@+id/tvListArtistName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Oh No"
             android:textSize="16sp"
             />
     </androidx.appcompat.widget.LinearLayoutCompat>

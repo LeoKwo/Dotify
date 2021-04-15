@@ -1,11 +1,24 @@
 package com.example.dotify
 
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.ericchee.songdataprovider.Song
 import java.util.*
+
+private const val SONG_KEY = "song"
+
+fun navigateToMainActivity(context: Context, song: Song)  {
+    val intent = Intent(context, MainActivity::class.java)
+    val bundle = Bundle()
+    bundle.putParcelable(SONG_KEY, song)
+    intent.putExtras(bundle)
+    context.startActivity(intent)
+}
 
 class MainActivity : AppCompatActivity() {
     private val lowBound: Int = 100
@@ -40,6 +53,15 @@ class MainActivity : AppCompatActivity() {
 
         val rnd = Random()
         ivAlbum.setOnLongClickListener {aaLongPress(songCount, rnd)}
+
+        val songName = findViewById<TextView>(R.id.tvSongName)
+        val artistName = findViewById<TextView>(R.id.tvArtistName)
+        val launchIntent = intent
+        val song: Song? = launchIntent.extras?.getParcelable<Song>(SONG_KEY)
+
+        ivAlbum.setImageResource(song?.largeImageID !!)
+        songName.text = song.title
+        artistName.text = song.artist
     }
 
     private fun preOnClick() {
