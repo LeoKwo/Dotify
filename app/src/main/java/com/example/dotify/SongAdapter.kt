@@ -3,6 +3,7 @@ package com.example.dotify
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.ericchee.songdataprovider.Song
 import com.example.dotify.databinding.SongListItemBinding
@@ -38,8 +39,13 @@ class SongAdapter(private var listOfSongs: List<Song>): RecyclerView.Adapter<Son
     }
 
     fun updateSongs(newListOfSongs: List<Song>) {
+//        listOfSongs = newListOfSongs
+//        notifyDataSetChanged()
+        val callback = SongDiffCallback(newListOfSongs, listOfSongs)
+        val result = DiffUtil.calculateDiff(callback)
+        result.dispatchUpdatesTo(this)
+
         listOfSongs = newListOfSongs
-        notifyDataSetChanged()
     }
 
 //    class SongViewHolder(val binding: SongListItemBinding): RecyclerView.ViewHolder(binding.root)

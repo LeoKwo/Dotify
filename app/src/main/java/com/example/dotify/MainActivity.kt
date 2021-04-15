@@ -62,6 +62,9 @@ class MainActivity : AppCompatActivity() {
         ivAlbum.setImageResource(song?.largeImageID !!)
         songName.text = song.title
         artistName.text = song.artist
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
     }
 
     private fun preOnClick() {
@@ -98,4 +101,10 @@ class MainActivity : AppCompatActivity() {
         song.setTextColor(color)
         return true
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
+
 }
