@@ -9,4 +9,5 @@
     <dimen name="prev_next_margin">30dp</dimen>
     <dimen name="album_art_margin_land">40dp</dimen>
     <dimen name="btSettings_margin">15dp</dimen>
+    <dimen name="settings_activity_buttons_margin">20dp</dimen>
 </resources>
