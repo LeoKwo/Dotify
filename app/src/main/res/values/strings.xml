@@ -10,7 +10,6 @@
     <string name="shuffle">Shuffle</string>
     <string name="song_info_format">%s - %s</string>
     <string name="settings">Settings</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Profile</string>
     <string name="statistics">Statistics</string>
@@ -19,4 +18,8 @@
     <string name="profile_user_birthday">Birthday: April 25, 1940</string>
     <string name="profile_user_height">Height: 185 cm</string>
     <string name="profile_user_weight">Weight: 192 lbs</string>
+    <string name="about_creator">Created by Leo Kwo</string>
+    <string name="about_version_format">Version: %s</string>
+    <string name="about_website">Visit my website: leokwo.com</string>
+    <string name="stats_song_stats_format">%s by %s has been played %s times.</string>
 </resources>

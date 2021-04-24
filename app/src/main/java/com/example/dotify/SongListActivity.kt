@@ -1,13 +1,8 @@
 package com.example.dotify
 
-import android.content.Context
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
-
 import androidx.core.view.isInvisible
-
 import com.ericchee.songdataprovider.SongDataProvider
 import com.ericchee.songdataprovider.Song
 import com.example.dotify.databinding.ActivitySongListBinding

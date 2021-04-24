@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.ericchee.songdataprovider.Song
@@ -25,10 +24,14 @@ class PlayerActivity : AppCompatActivity() {
     private val lowBound: Int = 100
     private val highBound: Int = 10000
     private var playCount: Int = 0
+    // new
+    private lateinit var song: Song
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
+
+
 
         val prev = findViewById<ImageButton>(R.id.ibPrev)
         val next = findViewById<ImageButton>(R.id.ibNext)
@@ -68,13 +71,23 @@ class PlayerActivity : AppCompatActivity() {
         val launchIntent = intent
 
 //        OG
-        val song: Song? = launchIntent.extras?.getParcelable<Song>(SONG_KEY)
-
-        if (song != null) {
+        launchIntent.extras?.getParcelable<Song>(SONG_KEY)?.let { song ->
             ivAlbum.setImageResource(song.largeImageID)
             songName.text = song.title
             artistName.text = song.artist
+            this.song = song
         }
+
+
+//        val song = launchIntent.extras?.getParcelable<Song>(SONG_KEY)
+//        if (song != null) {
+//            ivAlbum.setImageResource(song.largeImageID)
+//            songName.text = song.title
+//            artistName.text = song.artist
+//
+////            startSettingsActivity(this@PlayerActivity, song)
+//
+//        }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -95,7 +108,9 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun btSettingsOnClick() {
-        navigateToSettingsActivity(this@PlayerActivity)
+//        navigateToSettingsActivity(this@PlayerActivity)
+
+        startSettingsActivity(this@PlayerActivity, song, playCount)
     }
 
     private fun aaLongPress(song: TextView, rnd: Random):Boolean {

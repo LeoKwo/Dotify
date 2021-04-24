@@ -10,4 +10,11 @@
     <dimen name="album_art_margin_land">40dp</dimen>
     <dimen name="btSettings_margin">15dp</dimen>
     <dimen name="settings_activity_buttons_margin">20dp</dimen>
+    <dimen name="about_padding">20dp</dimen>
+    <dimen name="about_textview_size">20sp</dimen>
+    <dimen name="about_textview_margin">10sp</dimen>
+    <dimen name="stats_textview_margin">20dp</dimen>
+    <dimen name="stats_textview_textsize">20sp</dimen>
+    <dimen name="stats_imageview_margin">20dp</dimen>
+    <dimen name="stats_textview_padding">20dp</dimen>
 </resources>
