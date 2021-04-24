@@ -58,11 +58,12 @@ class MainActivity : AppCompatActivity() {
         val artistName = findViewById<TextView>(R.id.tvArtistName)
         val launchIntent = intent
         val song: Song? = launchIntent.extras?.getParcelable<Song>(SONG_KEY)
+        if (song != null) {
 
-        ivAlbum.setImageResource(song?.largeImageID !!)
-        songName.text = song.title
-        artistName.text = song.artist
-
+            ivAlbum.setImageResource(song.largeImageID)
+            songName.text = song.title
+            artistName.text = song.artist
+        }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     }
