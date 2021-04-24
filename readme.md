@@ -5,10 +5,12 @@ This app is a mockup music player. It randomlly generates a number of songs play
 
 In homework 2, I implemented a list of all the songs in the playlist that can respond to user's touch input and can shuffle itself when user clicks the shuffle button.
 
+In homework 3, I implemented landscape views for the player and the list of songs screens. I also added a settings page where the users can access information about the current user, the song statistics, and app information.
+
 **Extra credit attempted**
-- Show a stock Android back arrow button, ←, in the Header/Toolbar of Activity B. When clicked, it should navigate back to SongListActivity
-- When a user presses shuffle, the list should animate the changes using DiffUtil
+- Every Fragment (other than SettingsFragment) has a Up/back button in the top right corner. Clicking will take you back to the previous fragment
 
 **Running in the emulator...**
-![demo](img/in_sim_2.jpg)
-![demo](img/in_sim_2_2.jpg)
+![demo](img/in_sim_3.jpg)
+![demo](img/in_sim_3_2.jpg)
+![demo](img/in_sim_3_3.jpg)
