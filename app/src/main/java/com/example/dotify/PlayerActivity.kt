@@ -4,12 +4,14 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.ericchee.songdataprovider.Song
 import java.util.*
 
 private const val SONG_KEY = "song"
+private const val PLAY_COUNT_KEY = "playCount"
 
 fun navigateToMainActivity(context: Context, song: Song)  {
     val intent = Intent(context, MainActivity::class.java)
@@ -22,6 +24,7 @@ fun navigateToMainActivity(context: Context, song: Song)  {
 class MainActivity : AppCompatActivity() {
     private val lowBound: Int = 100
     private val highBound: Int = 10000
+    private var playCount: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,18 +35,25 @@ class MainActivity : AppCompatActivity() {
         val play = findViewById<ImageButton>(R.id.ibPlay)
         val songCount = findViewById<TextView>(R.id.tvSongsPlayed)
 
-//        val username = findViewById<TextView>(R.id.tvUserName)
-//        val newUsername = findViewById<EditText>(R.id.etUserName)
         val btSettings = findViewById<Button>(R.id.btSettings)
 
         val ivAlbum = findViewById<ImageView>(R.id.ivAlbumArt)
 
-//        newUsername.visibility = View.INVISIBLE
-
         prev.setOnClickListener {preOnClick()}
 
+
+//        NEW
         val rndPlay = (lowBound..highBound).random()
-        songCount.text = rndPlay.toString()
+        playCount = rndPlay
+        if (savedInstanceState != null) {
+            songCount.text = savedInstanceState.getInt(PLAY_COUNT_KEY, 0).toString()
+            playCount = savedInstanceState.getInt(PLAY_COUNT_KEY, 0)
+        } else {
+            songCount.text = playCount.toString()
+        }
+//        OG
+//        val rndPlay = (lowBound..highBound).random()
+//        songCount.text = rndPlay.toString()
         play.setOnClickListener {playOnClick(songCount)}
 
         next.setOnClickListener {nextOnClick()}
@@ -56,15 +66,16 @@ class MainActivity : AppCompatActivity() {
         val songName = findViewById<TextView>(R.id.tvSongName)
         val artistName = findViewById<TextView>(R.id.tvArtistName)
         val launchIntent = intent
-        val song: Song? = launchIntent.extras?.getParcelable<Song>(SONG_KEY)
-        if (song != null) {
 
+//        OG
+        val song: Song? = launchIntent.extras?.getParcelable<Song>(SONG_KEY)
+
+        if (song != null) {
             ivAlbum.setImageResource(song.largeImageID)
             songName.text = song.title
             artistName.text = song.artist
         }
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
     }
 
     private fun preOnClick() {
@@ -72,7 +83,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun playOnClick(songCount: TextView) {
-        songCount.text = (songCount.text.toString().toInt() + 1).toString()
+//        NEW
+        playCount = songCount.text.toString().toInt() + 1
+        songCount.text = (playCount).toString()
+//        OG
+//        songCount.text = (songCount.text.toString().toInt() + 1).toString()
     }
 
     private fun nextOnClick() {
@@ -92,6 +107,11 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putInt(PLAY_COUNT_KEY, playCount)
+        super.onSaveInstanceState(outState)
     }
 
 }

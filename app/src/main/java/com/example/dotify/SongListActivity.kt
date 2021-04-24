@@ -10,12 +10,13 @@ import com.ericchee.songdataprovider.SongDataProvider
 import com.ericchee.songdataprovider.Song
 import com.example.dotify.databinding.ActivitySongListBinding
 
+private const val CURRENTLY_PLAYING_KEY = "currentlyPlaying"
 
 class SongListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySongListBinding
     private lateinit var currentlyPlaying :Song
-    private val currentlyPlayingKey: String = "currentlyPlaying"
+//    private val currentlyPlayingKey: String = "currentlyPlaying"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +30,7 @@ class SongListActivity : AppCompatActivity() {
             rvSongList.adapter = adapter
 
             if (savedInstanceState != null) {
-                val savedCurrentlyPlaying = savedInstanceState.getParcelable<Song>(currentlyPlayingKey)
+                val savedCurrentlyPlaying = savedInstanceState.getParcelable<Song>(CURRENTLY_PLAYING_KEY)
                 if (savedCurrentlyPlaying != null ) {
                     clSongInfo.isInvisible = false
                     currentlyPlaying = savedCurrentlyPlaying
@@ -71,7 +72,7 @@ class SongListActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
-        outState.putParcelable(currentlyPlayingKey, currentlyPlaying)
+        outState.putParcelable(CURRENTLY_PLAYING_KEY, currentlyPlaying)
         super.onSaveInstanceState(outState)
     }
 
