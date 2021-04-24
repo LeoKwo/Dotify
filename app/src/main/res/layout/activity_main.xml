@@ -10,7 +10,6 @@
         android:id="@+id/ivAlbumArt"
         android:layout_width="@dimen/album_art_size"
         android:layout_height="@dimen/album_art_size"
-        app:srcCompat="@drawable/welcome_horizons"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clUser"
@@ -27,30 +26,11 @@
         android:layout_marginTop="@dimen/user_bar_margin"
         >
 
-        <TextView
-            android:id="@+id/tvUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/default_username"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBaseline_toBaselineOf="@id/btChangeUser"
-            />
-
-        <EditText
-            android:id="@+id/etUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/new_user"
-            android:inputType="text"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintBaseline_toBaselineOf="@id/btChangeUser"
-            />
-
         <Button
-            android:id="@+id/btChangeUser"
+            android:id="@+id/btSettings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/change_user"
+            android:text="@string/settings"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -75,7 +55,6 @@
             android:id="@+id/tvSongName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/song_name"
             android:textSize="@dimen/song_title_size"
             android:textAlignment="center"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -88,7 +67,6 @@
             android:id="@+id/tvArtistName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/artist_name"
             android:singleLine="true"
             app:layout_constraintTop_toBottomOf="@id/tvSongName"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -100,7 +78,6 @@
             android:id="@+id/tvSongsPlayed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/default_play_count"
             android:textColor="@color/black"
             app:layout_constraintTop_toBottomOf="@id/tvArtistName"
             app:layout_constraintLeft_toLeftOf="parent"

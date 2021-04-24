@@ -33,13 +33,13 @@ class MainActivity : AppCompatActivity() {
         val play = findViewById<ImageButton>(R.id.ibPlay)
         val songCount = findViewById<TextView>(R.id.tvSongsPlayed)
 
-        val username = findViewById<TextView>(R.id.tvUserName)
-        val newUsername = findViewById<EditText>(R.id.etUserName)
-        val changeUsername = findViewById<Button>(R.id.btChangeUser)
+//        val username = findViewById<TextView>(R.id.tvUserName)
+//        val newUsername = findViewById<EditText>(R.id.etUserName)
+        val btSettings = findViewById<Button>(R.id.btSettings)
 
         val ivAlbum = findViewById<ImageView>(R.id.ivAlbumArt)
 
-        newUsername.visibility = View.INVISIBLE
+//        newUsername.visibility = View.INVISIBLE
 
         prev.setOnClickListener {preOnClick()}
 
@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
 
         next.setOnClickListener {nextOnClick()}
 
-        changeUsername.setOnClickListener {changeOnClick(changeUsername, newUsername, username)}
+        btSettings.setOnClickListener {btSettingsOnClick()}
 
         val rnd = Random()
         ivAlbum.setOnLongClickListener {aaLongPress(songCount, rnd)}
@@ -80,21 +80,8 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Skipping to next track", Toast.LENGTH_LONG).show()
     }
 
-    private fun changeOnClick(change: Button, new: EditText, username: TextView) {
-        if (change.text == "Change User") {
-            change.text = "Apply"
-            new.visibility = View.VISIBLE
-            username.visibility = View.INVISIBLE
-        } else {
-            if (new.text.toString() == "") {
-                Toast.makeText(this, "You need to enter a username!", Toast.LENGTH_LONG).show()
-            } else {
-                change.text = "Change User"
-                new.visibility = View.INVISIBLE
-                username.text = new.text
-                username.visibility = View.VISIBLE
-            }
-        }
+    private fun btSettingsOnClick() {
+
     }
 
     private fun aaLongPress(song: TextView, rnd: Random):Boolean {
