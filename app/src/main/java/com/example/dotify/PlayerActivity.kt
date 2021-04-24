@@ -13,15 +13,15 @@ import java.util.*
 private const val SONG_KEY = "song"
 private const val PLAY_COUNT_KEY = "playCount"
 
-fun navigateToMainActivity(context: Context, song: Song)  {
-    val intent = Intent(context, MainActivity::class.java)
+fun navigateToPlayerActivity(context: Context, song: Song)  {
+    val intent = Intent(context, PlayerActivity::class.java)
     val bundle = Bundle()
     bundle.putParcelable(SONG_KEY, song)
     intent.putExtras(bundle)
     context.startActivity(intent)
 }
 
-class MainActivity : AppCompatActivity() {
+class PlayerActivity : AppCompatActivity() {
     private val lowBound: Int = 100
     private val highBound: Int = 10000
     private var playCount: Int = 0
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun btSettingsOnClick() {
-
+        navigateToSettingsActivity(this@PlayerActivity)
     }
 
     private fun aaLongPress(song: TextView, rnd: Random):Boolean {

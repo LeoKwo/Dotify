@@ -1,5 +1,7 @@
 package com.example.dotify
 
+import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -50,7 +52,7 @@ class SongListActivity : AppCompatActivity() {
                 adapter.updateSongs(listOfSongs.toMutableList().shuffled())
             }
             clSongInfo.setOnClickListener {
-                navigateToMainActivity(this@SongListActivity, currentlyPlaying)
+                navigateToPlayerActivity(this@SongListActivity, currentlyPlaying)
             }
 
         }
