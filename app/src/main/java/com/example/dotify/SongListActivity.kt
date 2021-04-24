@@ -2,6 +2,7 @@ package com.example.dotify
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 
 import androidx.core.view.isInvisible
 
@@ -14,6 +15,7 @@ class SongListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySongListBinding
     private lateinit var currentlyPlaying :Song
+    private val currentlyPlayingKey: String = "currentlyPlaying"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,37 +24,55 @@ class SongListActivity : AppCompatActivity() {
         val listOfSongs = SongDataProvider.getAllSongs()
 
         with(binding) {
-//            SongAdapter(listOfSongs)
+
             val adapter = SongAdapter(listOfSongs)
             rvSongList.adapter = adapter
+
+            if (savedInstanceState != null) {
+                val savedCurrentlyPlaying = savedInstanceState.getParcelable<Song>(currentlyPlayingKey)
+                if (savedCurrentlyPlaying != null ) {
+                    clSongInfo.isInvisible = false
+                    currentlyPlaying = savedCurrentlyPlaying
+                    tvSongInfo.text = root.context.getString(R.string.song_info_format, savedCurrentlyPlaying.title, savedCurrentlyPlaying.artist)
+                }
+            } else {
+                clSongInfo.isInvisible = true
+            }
+
             adapter.onSongClickListener = { song ->
-//                Toast.makeText(this@SongListActivity, "Pos: $pos", Toast.LENGTH_SHORT).show()
-//                val title = song.title
-//                val artist = song.artist
                 tvSongInfo.text = root.context.getString(R.string.song_info_format, song.title, song.artist)
-//                tvInfoArtistName.text = song.artist
                 clSongInfo.isInvisible = false
                 currentlyPlaying = song
-
-//                navigateToMainActivity(this@SongListActivity, song)
             }
 
             btnShuffle.setOnClickListener {
                 adapter.updateSongs(listOfSongs.toMutableList().shuffled())
-//                adapter.notifyDataSetChanged()
             }
-
-//            navigateToMainActivity(this@SongListActivity, song)
             clSongInfo.setOnClickListener {
                 navigateToMainActivity(this@SongListActivity, currentlyPlaying)
             }
-            // hide SongInfo Panel by default
-            clSongInfo.isInvisible = true
+
         }
 
+// OG
+//            adapter.onSongClickListener = { song ->
+//                tvSongInfo.text = root.context.getString(R.string.song_info_format, song.title, song.artist)
+//                clSongInfo.isInvisible = false
+//                currentlyPlaying = song
+//            }
+//            btnShuffle.setOnClickListener {
+//                adapter.updateSongs(listOfSongs.toMutableList().shuffled())
+//            }
+//            clSongInfo.setOnClickListener {
+//                navigateToMainActivity(this@SongListActivity, currentlyPlaying)
+//            }
+//            clSongInfo.isInvisible = true
+//        }
+    }
 
-
-
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelable(currentlyPlayingKey, currentlyPlaying)
+        super.onSaveInstanceState(outState)
     }
 
 }
