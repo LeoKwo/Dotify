@@ -23,7 +23,9 @@ class SettingsFragment : Fragment() {
     ): View? {
         val binding = FragmentSettingsBinding.inflate(inflater)
 
+
         with(binding) {
+
             btProfile.setOnClickListener{
                 navController.navigate(R.id.profileFragment)
             }
