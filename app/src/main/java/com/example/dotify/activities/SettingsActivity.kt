@@ -1,13 +1,13 @@
-package com.example.dotify
+package com.example.dotify.activities
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.ericchee.songdataprovider.Song
+import com.example.dotify.R
 
 private const val SONG_KEY = "song"
 private const val PLAY_COUNT_KEY = "playCount"

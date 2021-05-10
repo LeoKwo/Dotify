@@ -1,4 +1,4 @@
-package com.example.dotify
+package com.example.dotify.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,4 +1,4 @@
-package com.example.dotify
+package com.example.dotify.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.dotify.R
+import com.example.dotify.fragments.SettingsFragmentArgs
+import com.example.dotify.fragments.SettingsFragmentDirections
 import com.example.dotify.databinding.FragmentSettingsBinding
 
 

@@ -1,12 +1,16 @@
-package com.example.dotify
+package com.example.dotify.activities
 
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.ericchee.songdataprovider.Song
+import com.example.dotify.DotifyApplication
+import com.example.dotify.R
+import kotlinx.coroutines.selects.select
 import java.util.*
 
 private const val SONG_KEY = "song"
@@ -24,13 +28,13 @@ class PlayerActivity : AppCompatActivity() {
     private val lowBound: Int = 100
     private val highBound: Int = 10000
     private var playCount: Int = 0
-    // new
+
     private lateinit var song: Song
+    private lateinit var dotifyApp: DotifyApplication
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_player)
-
 
 
         val prev = findViewById<ImageButton>(R.id.ibPrev)
@@ -45,18 +49,17 @@ class PlayerActivity : AppCompatActivity() {
         prev.setOnClickListener {preOnClick()}
 
 
-//        NEW
-        val rndPlay = (lowBound..highBound).random()
-        playCount = rndPlay
-        if (savedInstanceState != null) {
-            songCount.text = savedInstanceState.getInt(PLAY_COUNT_KEY, 0).toString()
-            playCount = savedInstanceState.getInt(PLAY_COUNT_KEY, 0)
-        } else {
-            songCount.text = playCount.toString()
-        }
-//        OG
+
+
+        // old
 //        val rndPlay = (lowBound..highBound).random()
-//        songCount.text = rndPlay.toString()
+//        playCount = rndPlay
+
+        // new
+
+
+
+
         play.setOnClickListener {playOnClick(songCount)}
 
         next.setOnClickListener {nextOnClick()}
@@ -66,28 +69,42 @@ class PlayerActivity : AppCompatActivity() {
         val rnd = Random()
         ivAlbum.setOnLongClickListener {aaLongPress(songCount, rnd)}
 
+
         val songName = findViewById<TextView>(R.id.tvSongName)
         val artistName = findViewById<TextView>(R.id.tvArtistName)
         val launchIntent = intent
-
-//        OG
-        launchIntent.extras?.getParcelable<Song>(SONG_KEY)?.let { song ->
-            ivAlbum.setImageResource(song.largeImageID)
-            songName.text = song.title
-            artistName.text = song.artist
-            this.song = song
-        }
-
-
-//        val song = launchIntent.extras?.getParcelable<Song>(SONG_KEY)
-//        if (song != null) {
+//        // old
+//        launchIntent.extras?.getParcelable<Song>(SONG_KEY)?.let { song ->
 //            ivAlbum.setImageResource(song.largeImageID)
 //            songName.text = song.title
 //            artistName.text = song.artist
-//
-////            startSettingsActivity(this@PlayerActivity, song)
-//
+//            this.song = song
 //        }
+        // new
+        dotifyApp = this.applicationContext as DotifyApplication
+        val counter = dotifyApp.playCountMap
+        val selectedSong = dotifyApp.selectedSong
+        val count = counter[selectedSong?.title]
+
+        if (count != null) {
+            playCount = count
+        }
+
+        if (savedInstanceState != null) {
+            songCount.text = savedInstanceState.getInt(PLAY_COUNT_KEY, 0).toString()
+            playCount = savedInstanceState.getInt(PLAY_COUNT_KEY, 0)
+        } else {
+            songCount.text = playCount.toString()
+        }
+
+
+        if (selectedSong != null) {
+            ivAlbum.setImageResource(selectedSong.largeImageID)
+            songName.text = selectedSong.title
+            artistName.text = selectedSong.artist
+            this.song = selectedSong
+        }
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
@@ -96,11 +113,12 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun playOnClick(songCount: TextView) {
-//        NEW
         playCount = songCount.text.toString().toInt() + 1
         songCount.text = (playCount).toString()
-//        OG
-//        songCount.text = (songCount.text.toString().toInt() + 1).toString()
+        val selectedSong = dotifyApp.selectedSong
+        if (selectedSong != null) {
+            dotifyApp.playCountMap[selectedSong.title] = playCount
+        }
     }
 
     private fun nextOnClick() {
@@ -108,8 +126,6 @@ class PlayerActivity : AppCompatActivity() {
     }
 
     private fun btSettingsOnClick() {
-//        navigateToSettingsActivity(this@PlayerActivity)
-
         startSettingsActivity(this@PlayerActivity, song, playCount)
     }
 
@@ -128,5 +144,4 @@ class PlayerActivity : AppCompatActivity() {
         outState.putInt(PLAY_COUNT_KEY, playCount)
         super.onSaveInstanceState(outState)
     }
-
 }
