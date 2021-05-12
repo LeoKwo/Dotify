@@ -22,7 +22,6 @@ class DataRepository {
     suspend fun getLibrary(): Library {
         return DotifyService.getLibrary()
     }
-
 }
 
 interface DotifyService {

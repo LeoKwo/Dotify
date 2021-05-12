@@ -8,6 +8,9 @@ import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import coil.load
+import coil.transform.CircleCropTransformation
+import com.example.dotify.R
 import com.example.dotify.databinding.FragmentProfileBinding
 import com.example.dotify.managers.AccountManager
 import com.example.dotify.models.Account
@@ -62,8 +65,11 @@ class ProfileFragment : Fragment() {
                     tvProfileLastName.text = account.lastName
                     tvProfileHasNose.text = account.hasNose.toString()
                     tvProfilePlatform.text = account.platform.toString()
+                    ivProfilePicture.load(account.profilePicURL) {
+                        crossfade(true)
+                        placeholder(R.drawable.iv_account_placeholder)
+                    }
                 }.onFailure {
-//                    Toast.makeText(activity, "Error occurred when fetching your Account information", Toast.LENGTH_SHORT).show()
                     tvErrorMsg.isInvisible = false
                 }
             }

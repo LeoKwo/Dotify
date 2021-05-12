@@ -17,7 +17,7 @@ import com.example.dotify.databinding.FragmentSettingsBinding
 class SettingsFragment : Fragment() {
 
     private val navController by lazy { findNavController() }
-    private val safeArgs: SettingsFragmentArgs by navArgs()
+//    private val safeArgs: SettingsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,7 +38,8 @@ class SettingsFragment : Fragment() {
             }
 
             btStats.setOnClickListener{
-                navController.navigate(SettingsFragmentDirections.actionSettingsFragmentToStatsFragment(safeArgs.song, safeArgs.playCount))
+//                navController.navigate(SettingsFragmentDirections.actionSettingsFragmentToStatsFragment(safeArgs.song, safeArgs.playCount))
+                navController.navigate(R.id.statsFragment)
             }
         }
 

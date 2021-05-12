@@ -60,15 +60,3 @@ class AccountManager() {
 //    }
 
 }
-
-
-private val accountJsonString = """
-    {
-        "username": "whomustnotbenamed",
-        "firstName": "Tom",
-        "lastName": "Riddle",
-        "hasNose": false,
-        "platform": 9.75,
-        "profilePicURL": "https://raw.githubusercontent.com/echeeUW/codesnippets/master/voldemort.png"
-    }
-""".trimIndent()

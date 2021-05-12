@@ -1,7 +1,11 @@
 package com.example.dotify.models
 
-data class Song (
-    val id: Int,
+import android.os.Parcel
+import android.os.Parcelable
+
+
+data class Song(
+    val id: String,
     val title: String,
     val artist: String,
     val durationMillis: Int,

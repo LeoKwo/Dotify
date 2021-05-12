@@ -7,10 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.ericchee.songdataprovider.Song
+import coil.load
+//import com.ericchee.songdataprovider.Song
 import com.example.dotify.DotifyApplication
 import com.example.dotify.R
 import com.example.dotify.managers.MusicManager
+import com.example.dotify.models.Song
 import kotlinx.coroutines.selects.select
 import java.util.*
 
@@ -20,14 +22,15 @@ private const val PLAY_COUNT_KEY = "playCount"
 fun navigateToPlayerActivity(context: Context, song: Song)  {
     val intent = Intent(context, PlayerActivity::class.java)
     val bundle = Bundle()
-    bundle.putParcelable(SONG_KEY, song)
+//    bundle.putParcelable(SONG_KEY, song)
+    bundle.putString(SONG_KEY, song.id)
     intent.putExtras(bundle)
     context.startActivity(intent)
 }
 
 class PlayerActivity : AppCompatActivity() {
     private val lowBound: Int = 100
-    private val highBound: Int = 10000
+    private val highBound: Int = 1999
     private var playCount: Int = 0
 
     private lateinit var song: Song
@@ -48,9 +51,7 @@ class PlayerActivity : AppCompatActivity() {
 
         val ivAlbum = findViewById<ImageView>(R.id.ivAlbumArt)
 
-        prev.setOnClickListener {preOnClick()}
-
-
+        prev.setOnClickListener { preOnClick() }
 
 
         // old
@@ -60,21 +61,19 @@ class PlayerActivity : AppCompatActivity() {
         // new
 
 
+        play.setOnClickListener { playOnClick(songCount) }
 
+        next.setOnClickListener { nextOnClick() }
 
-        play.setOnClickListener {playOnClick(songCount)}
-
-        next.setOnClickListener {nextOnClick()}
-
-        btSettings.setOnClickListener {btSettingsOnClick()}
+        btSettings.setOnClickListener { btSettingsOnClick() }
 
         val rnd = Random()
-        ivAlbum.setOnLongClickListener {aaLongPress(songCount, rnd)}
+        ivAlbum.setOnLongClickListener { aaLongPress(songCount, rnd) }
 
 
         val songName = findViewById<TextView>(R.id.tvSongName)
         val artistName = findViewById<TextView>(R.id.tvArtistName)
-        val launchIntent = intent
+//        val launchIntent = intent
 //        // old
 //        launchIntent.extras?.getParcelable<Song>(SONG_KEY)?.let { song ->
 //            ivAlbum.setImageResource(song.largeImageID)
@@ -90,10 +89,21 @@ class PlayerActivity : AppCompatActivity() {
 
         val counter = musicManager.playCountMap
         val selectedSong = musicManager.selectedSong
-        val count = counter[selectedSong?.title]
+        if (selectedSong != null) {
+            val count = counter[selectedSong?.title]
+            if (count != null) {
+                playCount = count
+            } else {
+                playCount = (lowBound..highBound).random()
+                counter[selectedSong.title] = playCount
+            }
 
-        if (count != null) {
-            playCount = count
+            if (selectedSong != null) {
+                ivAlbum.load(selectedSong.largeImageURL) {
+                    crossfade(true)
+                    placeholder(R.drawable.iv_account_placeholder)
+                }
+            }
         }
 
         if (savedInstanceState != null) {
@@ -105,7 +115,7 @@ class PlayerActivity : AppCompatActivity() {
 
 
         if (selectedSong != null) {
-            ivAlbum.setImageResource(selectedSong.largeImageID)
+//            ivAlbum.setImageResource(selectedSong.largeImageID)
             songName.text = selectedSong.title
             artistName.text = selectedSong.artist
             this.song = selectedSong
