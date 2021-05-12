@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.ericchee.songdataprovider.Song
 import com.example.dotify.DotifyApplication
 import com.example.dotify.R
+import com.example.dotify.managers.MusicManager
 import kotlinx.coroutines.selects.select
 import java.util.*
 
@@ -30,7 +31,8 @@ class PlayerActivity : AppCompatActivity() {
     private var playCount: Int = 0
 
     private lateinit var song: Song
-    private lateinit var dotifyApp: DotifyApplication
+//    private lateinit var dotifyApp: DotifyApplication
+    private lateinit var musicManager: MusicManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,9 +83,13 @@ class PlayerActivity : AppCompatActivity() {
 //            this.song = song
 //        }
         // new
-        dotifyApp = this.applicationContext as DotifyApplication
-        val counter = dotifyApp.playCountMap
-        val selectedSong = dotifyApp.selectedSong
+
+//        dotifyApp = this.applicationContext as DotifyApplication
+        this.musicManager = (this.applicationContext as DotifyApplication).musicManager
+
+
+        val counter = musicManager.playCountMap
+        val selectedSong = musicManager.selectedSong
         val count = counter[selectedSong?.title]
 
         if (count != null) {
@@ -115,9 +121,9 @@ class PlayerActivity : AppCompatActivity() {
     private fun playOnClick(songCount: TextView) {
         playCount = songCount.text.toString().toInt() + 1
         songCount.text = (playCount).toString()
-        val selectedSong = dotifyApp.selectedSong
+        val selectedSong = musicManager.selectedSong
         if (selectedSong != null) {
-            dotifyApp.playCountMap[selectedSong.title] = playCount
+            musicManager.playCountMap[selectedSong.title] = playCount
         }
     }
 

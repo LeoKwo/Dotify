@@ -6,6 +6,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.ProfileFragment">
 
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvErrorMsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="#FF9800"
+        android:visibility="invisible"
+        android:text="@string/profile_account_error_msg"
+        android:padding="10sp"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        />
+
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/ivProfilePicture"
         android:layout_width="250dp"
@@ -14,14 +31,14 @@
         app:layout_constraintBottom_toTopOf="@id/tvProfileUsername"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:src="@drawable/profile_joker"
+
         />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvProfileUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/profile_username"
+
         android:textSize="35sp"
         android:textStyle="bold"
         android:textColor="@color/black"
@@ -30,6 +47,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         />
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/llProfileInfo"
         android:layout_width="wrap_content"
@@ -42,27 +60,40 @@
         >
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvProfileFirstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/profile_user_birthday"
+
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/ivProfilePicture"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             />
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvProfileLastName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/profile_user_height"
+
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/ivProfilePicture"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             />
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvProfileHasNose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/profile_user_weight"
+
+            android:textSize="20sp"
+            app:layout_constraintTop_toBottomOf="@id/ivProfilePicture"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvProfilePlatform"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
             android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@id/ivProfilePicture"
             app:layout_constraintLeft_toLeftOf="parent"

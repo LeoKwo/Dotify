@@ -9,6 +9,7 @@ import com.example.dotify.DotifyApplication
 import com.example.dotify.R
 import com.example.dotify.adapters.SongAdapter
 import com.example.dotify.databinding.ActivitySongListBinding
+import com.example.dotify.managers.MusicManager
 
 private const val CURRENTLY_PLAYING_KEY = "currentlyPlaying"
 
@@ -16,11 +17,13 @@ class SongListActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySongListBinding
     private lateinit var currentlyPlaying :Song
-    private lateinit var dotifyApp: DotifyApplication
+//    private lateinit var dotifyApp: DotifyApplication
+    private lateinit var musicManager: MusicManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        dotifyApp = this.applicationContext as DotifyApplication
+//        dotifyApp = this.applicationContext as DotifyApplication
+        this.musicManager = (this.applicationContext as DotifyApplication).musicManager
 
         binding = ActivitySongListBinding.inflate(layoutInflater).apply { setContentView(root) }
 
@@ -49,7 +52,8 @@ class SongListActivity : AppCompatActivity() {
                 clSongInfo.isInvisible = false
                 currentlyPlaying = song
 
-                dotifyApp.selectedSong = song
+//                musicManager.selectedSong = song
+                musicManager.onSongSelected(song)
             }
 
             btnShuffle.setOnClickListener {
