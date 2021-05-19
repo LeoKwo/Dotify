@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.example.dotify.R
-//import com.ericchee.songdataprovider.Song
 import com.example.dotify.SongDiffCallback
 import com.example.dotify.databinding.SongListItemBinding
 import com.example.dotify.models.Song
@@ -28,8 +27,6 @@ class SongAdapter(private var listOfSongs: List<Song>): RecyclerView.Adapter<Son
             tvListSongName.text = song.title
             tvListArtistName.text = song.artist
 
-//            may need to change this
-//            ivAlbumArtSmall.setImageResource(song.smallImageURL)
             ivAlbumArtSmall.load(song.smallImageURL) {
                 crossfade(true)
                 placeholder(R.drawable.iv_account_placeholder)
@@ -46,14 +43,10 @@ class SongAdapter(private var listOfSongs: List<Song>): RecyclerView.Adapter<Son
     }
 
     fun updateSongs(newListOfSongs: List<Song>) {
-//        listOfSongs = newListOfSongs
-//        notifyDataSetChanged()
         val callback = SongDiffCallback(newListOfSongs, listOfSongs)
         val result = DiffUtil.calculateDiff(callback)
         result.dispatchUpdatesTo(this)
 
         listOfSongs = newListOfSongs
     }
-
-//    class SongViewHolder(val binding: SongListItemBinding): RecyclerView.ViewHolder(binding.root)
 }

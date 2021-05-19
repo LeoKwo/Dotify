@@ -8,20 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.navArgs
 import coil.load
 import com.example.dotify.DotifyApplication
 import com.example.dotify.R
 import com.example.dotify.databinding.FragmentStatsBinding
 import com.example.dotify.managers.MusicManager
-import com.example.dotify.models.Library
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.selects.select
 
 class StatsFragment : Fragment() {
 
-//    private val navController by lazy { findNavController() }
-//    private val safeArgs: StatsFragmentArgs by navArgs()
     lateinit var musicManager: MusicManager
 
     override fun onCreateView(
@@ -35,18 +30,9 @@ class StatsFragment : Fragment() {
         val binding = FragmentStatsBinding.inflate(inflater)
 
         musicManager = (activity?.applicationContext as DotifyApplication).musicManager
-//        with(binding) {
 
-//            ivStatsAlbumArt.setImageResource(safeArgs.song.largeImageID)
-//            tvStatsPlayCount.text = root.context.getString(
-//                    R.string.stats_song_stats_format,
-//                safeArgs.song.title,
-//                safeArgs.song.artist,
-//                safeArgs.playCount.toString())
-
-//            ivStatsAlbumArt = library.dataRepository.getLibrary()
         loadStats(binding)
-//        }
+
         return binding.root
     }
 

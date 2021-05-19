@@ -4,16 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import coil.load
-//import com.ericchee.songdataprovider.Song
 import com.example.dotify.DotifyApplication
 import com.example.dotify.R
 import com.example.dotify.managers.MusicManager
 import com.example.dotify.models.Song
-import kotlinx.coroutines.selects.select
 import java.util.*
 
 private const val SONG_KEY = "song"
@@ -22,7 +19,6 @@ private const val PLAY_COUNT_KEY = "playCount"
 fun navigateToPlayerActivity(context: Context, song: Song)  {
     val intent = Intent(context, PlayerActivity::class.java)
     val bundle = Bundle()
-//    bundle.putParcelable(SONG_KEY, song)
     bundle.putString(SONG_KEY, song.id)
     intent.putExtras(bundle)
     context.startActivity(intent)
@@ -34,7 +30,6 @@ class PlayerActivity : AppCompatActivity() {
     private var playCount: Int = 0
 
     private lateinit var song: Song
-//    private lateinit var dotifyApp: DotifyApplication
     private lateinit var musicManager: MusicManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,14 +48,6 @@ class PlayerActivity : AppCompatActivity() {
 
         prev.setOnClickListener { preOnClick() }
 
-
-        // old
-//        val rndPlay = (lowBound..highBound).random()
-//        playCount = rndPlay
-
-        // new
-
-
         play.setOnClickListener { playOnClick(songCount) }
 
         next.setOnClickListener { nextOnClick() }
@@ -73,17 +60,6 @@ class PlayerActivity : AppCompatActivity() {
 
         val songName = findViewById<TextView>(R.id.tvSongName)
         val artistName = findViewById<TextView>(R.id.tvArtistName)
-//        val launchIntent = intent
-//        // old
-//        launchIntent.extras?.getParcelable<Song>(SONG_KEY)?.let { song ->
-//            ivAlbum.setImageResource(song.largeImageID)
-//            songName.text = song.title
-//            artistName.text = song.artist
-//            this.song = song
-//        }
-        // new
-
-//        dotifyApp = this.applicationContext as DotifyApplication
         this.musicManager = (this.applicationContext as DotifyApplication).musicManager
 
 
@@ -115,7 +91,6 @@ class PlayerActivity : AppCompatActivity() {
 
 
         if (selectedSong != null) {
-//            ivAlbum.setImageResource(selectedSong.largeImageID)
             songName.text = selectedSong.title
             artistName.text = selectedSong.artist
             this.song = selectedSong

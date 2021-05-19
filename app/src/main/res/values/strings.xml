@@ -23,4 +23,9 @@
     <string name="about_website">Visit my website: leokwo.com</string>
     <string name="stats_song_stats_format">%s by %s has been played %s times.</string>
     <string name="profile_account_error_msg">Error occurred when fetching your Account Information</string>
+    <string name="profile_first_name_format">First name: %s</string>
+    <string name="profile_last_name_format">Last name: %s</string>
+    <string name="profile_nose_false">You do not have a nose. Sorry.</string>
+    <string name="profile_nose_true">You have a nose. Awesome!</string>
+    <string name="profile_platform_format">You are on platform %s.</string>
 </resources>

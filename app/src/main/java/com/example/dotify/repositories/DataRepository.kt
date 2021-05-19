@@ -6,8 +6,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 
-//https://raw.githubusercontent.com/echeeUW/codesnippets/master/user_info.json
-
 class DataRepository {
     private val DotifyService = Retrofit.Builder()
         .baseUrl("https://raw.githubusercontent.com/")
