@@ -6,22 +6,68 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.work.*
 import com.ericchee.songdataprovider.SongDataProvider
 import com.example.dotify.R
 import com.example.dotify.activities.PlayerActivity
 import com.example.dotify.activities.SettingsActivity
+import com.example.dotify.models.Library
+import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
 private const val NEW_UPLOADED_MUSIC_ID = "New Uploaded Music"
+//private const val NEW_UPLOADED_MUSIC_KEY = "NEW_UPLOADED_MUSIC_KEY"
 private const val NEW_UPLOADED_MUSIC_TITLE_KEY = "NEW_UPLOADED_MUSIC_TITLE_KEY"
 private const val NEW_UPLOADED_MUSIC_ARTIST_KEY = "NEW_UPLOADED_MUSIC_ARTIST_KEY"
-private const val NEW_UPLOADED_MUSIC_IMAGE_KEY = "NEW_UPLOADED_MUSIC_IMAGE_KEY"
+private const val NEW_UPLOADED_MUSIC_LARGE_IMAGE_KEY = "NEW_UPLOADED_MUSIC_LARGE_IMAGE_KEY"
+private const val NEW_UPLOADED_MUSIC_SMALL_IMAGE_KEY = "NEW_UPLOADED_MUSIC_SMALL_IMAGE_KEY"
+private const val NEW_UPLOADED_MUSIC_DURATION = "NEW_UPLOADED_MUSIC_DURATION"
+private const val NEW_UPLOADED_MUSIC_TAG = "NEW_UPLOADED_MUSIC_TAG"
 
 class SongNotificationManager (
     private val context: Context
 ){
+    private var library: Library? = null
+
+    // HANDLES WORK REQUEST
+
+    private val workManager: WorkManager = WorkManager.getInstance(context)
+
+    fun repetitiveSongNotification() {
+        if (isRepetitiveSongNotificationRunning()) {
+            workManager.cancelAllWorkByTag(NEW_UPLOADED_MUSIC_TAG)
+        }
+
+        val requestNotification = PeriodicWorkRequestBuilder<SongNotificationWorker>(20, TimeUnit.MINUTES)
+                .setInitialDelay(5, TimeUnit.SECONDS)
+                .setConstraints(
+                        Constraints.Builder()
+                                .setRequiredNetworkType(NetworkType.CONNECTED)
+                                .build()
+                )
+                .addTag(NEW_UPLOADED_MUSIC_TAG)
+                .build()
+
+        workManager.enqueue(requestNotification)
+    }
+
+//    private fun stopRepetitiveNotification
+
+    private fun isRepetitiveSongNotificationRunning(): Boolean {
+        return workManager.getWorkInfosByTag(NEW_UPLOADED_MUSIC_TAG).get().any {
+            when(it.state) {
+                WorkInfo.State.RUNNING,
+                WorkInfo.State.ENQUEUED -> true
+                else -> false
+            }
+        }
+    }
+
+    // HANDLES NOTIFICATION BELOW
+
     private val notificationManager = NotificationManagerCompat.from(context)
     private var randomSong =  SongDataProvider.getAllSongs()
     init {
@@ -37,7 +83,12 @@ class SongNotificationManager (
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             putExtra(NEW_UPLOADED_MUSIC_TITLE_KEY, randomSong.title)
             putExtra(NEW_UPLOADED_MUSIC_ARTIST_KEY, randomSong.artist)
-            putExtra(NEW_UPLOADED_MUSIC_IMAGE_KEY, randomSong.largeImageID)
+            putExtra(NEW_UPLOADED_MUSIC_LARGE_IMAGE_KEY, randomSong.largeImageID)
+            putExtra(NEW_UPLOADED_MUSIC_SMALL_IMAGE_KEY, randomSong.smallImageID)
+            putExtra(NEW_UPLOADED_MUSIC_DURATION, randomSong.durationMillis)
+            putExtra(NEW_UPLOADED_MUSIC_ID, randomSong.id)
+//            randomSong.
+//            putExtra(NEW_UPLOADED_MUSIC_KEY, randomSong)
         }
         val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
@@ -78,5 +129,10 @@ class SongNotificationManager (
             // Create channel
             notificationManager.createNotificationChannel(channel)
         }
+    }
+
+    fun updateLibrary(library: Library) {
+
+        this.library  = library
     }
 }

@@ -48,8 +48,14 @@ class SettingsFragment : Fragment() {
                 navController.navigate(R.id.statsFragment)
             }
 
+            // This was working
+//            btNotification.setOnClickListener{
+//                songNotificationManager.publishSongNotification()
+//            }
+
+            // This was working
             btNotification.setOnClickListener{
-                songNotificationManager.publishSongNotification()
+                songNotificationManager.repetitiveSongNotification()
             }
         }
 

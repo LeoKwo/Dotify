@@ -16,9 +16,13 @@ import java.util.*
 
 private const val SONG_KEY = "song"
 private const val PLAY_COUNT_KEY = "playCount"
+//private const val NEW_UPLOADED_MUSIC_KEY = "NEW_UPLOADED_MUSIC_KEY
 private const val NEW_UPLOADED_MUSIC_TITLE_KEY = "NEW_UPLOADED_MUSIC_TITLE_KEY"
 private const val NEW_UPLOADED_MUSIC_ARTIST_KEY = "NEW_UPLOADED_MUSIC_ARTIST_KEY"
-private const val NEW_UPLOADED_MUSIC_IMAGE_KEY = "NEW_UPLOADED_MUSIC_IMAGE_KEY"
+private const val NEW_UPLOADED_MUSIC_LARGE_IMAGE_KEY = "NEW_UPLOADED_MUSIC_LARGE_IMAGE_KEY"
+private const val NEW_UPLOADED_MUSIC_SMALL_IMAGE_KEY = "NEW_UPLOADED_MUSIC_SMALL_IMAGE_KEY"
+private const val NEW_UPLOADED_MUSIC_DURATION = "NEW_UPLOADED_MUSIC_DURATION"
+private const val NEW_UPLOADED_MUSIC_ID = "New Uploaded Music"
 
 fun navigateToPlayerActivity(context: Context, song: Song)  {
     val intent = Intent(context, PlayerActivity::class.java)
@@ -72,31 +76,43 @@ class PlayerActivity : AppCompatActivity() {
 
         val notifiedTitle = intent.getStringExtra(NEW_UPLOADED_MUSIC_TITLE_KEY)
         val notifiedArtist = intent.getStringExtra(NEW_UPLOADED_MUSIC_ARTIST_KEY)
-        val notifiedImage = intent.getIntExtra(NEW_UPLOADED_MUSIC_IMAGE_KEY, 0)
+        val notifiedLargeImage = intent.getIntExtra(NEW_UPLOADED_MUSIC_LARGE_IMAGE_KEY, 0)
+        val notifiedSmallImage = intent.getIntExtra(NEW_UPLOADED_MUSIC_SMALL_IMAGE_KEY, 0)
+        val id = intent.getStringExtra(NEW_UPLOADED_MUSIC_ID)
+        val duration = intent.getIntExtra(NEW_UPLOADED_MUSIC_DURATION, 0)
+
+//        val newSong = intent.getBundleExtra(NEW_UPLOADED_MUSIC_KEY)
 
         // Add a back to song list button
-        val btBackToSongList = findViewById<Button>(R.id.btBackToSongList)
-        val intentSongList = Intent(this, SongListActivity::class.java)
-        btBackToSongList.setOnClickListener{
-            this.startActivity(intentSongList)
-        }
+//        val btBackToSongList = findViewById<Button>(R.id.btBackToSongList)
+//        val intentSongList = Intent(this, SongListActivity::class.java)
+//        btBackToSongList.setOnClickListener{
+//            this.startActivity(intentSongList)
+//        }
 
         // When the user clicks on a notification
-        if (notifiedTitle != null && notifiedArtist != null) {
+        if (notifiedTitle != null && notifiedArtist != null && id != null) {
             songName.text = notifiedTitle
             artistName.text = notifiedArtist
-            ivAlbum.load(notifiedImage) {
+            ivAlbum.load(notifiedLargeImage) {
                 crossfade(true)
                 placeholder(R.drawable.iv_account_placeholder)
             }
+
+//            musicManager.playCountMap[notifiedTitle] = (lowBound..highBound).random()
+//            musicManager.dataRepository.addNewSongToLibrary(Song(
+//                id, notifiedTitle, notifiedArtist, duration, notifiedSmallImage, notifiedLargeImage
+//            ))
+
+//            musicManager.onSongSelected(Song(id, notifiedTitle, notifiedArtist, duration, notifiedSmallImage, notifiedLargeImage))
             // Settings button is not working, so I disable it to prevent accidental clicking
-            btSettings.visibility = View.INVISIBLE
+//            btSettings.visibility = View.INVISIBLE
 
             // Disables back button because it exits the app instead of going back to song list
-            supportActionBar?.setDisplayHomeAsUpEnabled(false)
+//            supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
             // Reveals the back to collection button
-            btBackToSongList.visibility = View.VISIBLE
+//            btBackToSongList.visibility = View.VISIBLE
         } else {
 
             // When there is a song playing
