@@ -15,6 +15,9 @@ import com.example.dotify.activities.SettingsActivity
 import kotlin.random.Random
 
 private const val NEW_UPLOADED_MUSIC_ID = "New Uploaded Music"
+private const val NEW_UPLOADED_MUSIC_TITLE_KEY = "NEW_UPLOADED_MUSIC_TITLE_KEY"
+private const val NEW_UPLOADED_MUSIC_ARTIST_KEY = "NEW_UPLOADED_MUSIC_ARTIST_KEY"
+private const val NEW_UPLOADED_MUSIC_IMAGE_KEY = "NEW_UPLOADED_MUSIC_IMAGE_KEY"
 
 class SongNotificationManager (
     private val context: Context
@@ -32,8 +35,11 @@ class SongNotificationManager (
         // Define intent when user clicks on notification
         val intent = Intent(context, PlayerActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            putExtra(NEW_UPLOADED_MUSIC_TITLE_KEY, randomSong.title)
+            putExtra(NEW_UPLOADED_MUSIC_ARTIST_KEY, randomSong.artist)
+            putExtra(NEW_UPLOADED_MUSIC_IMAGE_KEY, randomSong.largeImageID)
         }
-        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         // Build information for Notification to show
         val builder = NotificationCompat.Builder(context, NEW_UPLOADED_MUSIC_ID) // Channel id for notification channel

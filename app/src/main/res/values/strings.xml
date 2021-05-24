@@ -33,4 +33,5 @@
     <string name="new_song_channel_description">This is the channel for notifications about newly posted songs by artists.</string>
     <string name="new_song_notification_title_format">%s just released a new song!</string>
     <string name="new_song_notification_content_format">Listen to %s now on Dotify</string>
+    <string name="back_to_your_collection">Back to Your Collection</string>
 </resources>
