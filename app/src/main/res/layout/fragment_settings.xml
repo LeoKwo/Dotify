@@ -30,4 +30,12 @@
         android:layout_margin="@dimen/settings_activity_buttons_margin"
         />
 
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/btNotification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/notification_switch"
+        android:layout_margin="@dimen/settings_activity_buttons_margin"
+        />
+
 </LinearLayout>

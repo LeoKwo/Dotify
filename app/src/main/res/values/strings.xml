@@ -28,4 +28,5 @@
     <string name="profile_nose_false">You do not have a nose. Sorry.</string>
     <string name="profile_nose_true">You have a nose. Awesome!</string>
     <string name="profile_platform_format">You are on platform %s.</string>
+    <string name="notification_switch">Notification about new songs</string>
 </resources>
