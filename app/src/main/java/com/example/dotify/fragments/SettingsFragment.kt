@@ -1,5 +1,6 @@
 package com.example.dotify.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,12 +9,19 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.dotify.R
 import com.example.dotify.databinding.FragmentSettingsBinding
+import com.example.dotify.managers.SongNotificationManager
+
 
 
 
 class SettingsFragment : Fragment() {
-
+    lateinit var songNotificationManager: SongNotificationManager
     private val navController by lazy { findNavController() }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        songNotificationManager = SongNotificationManager(context.applicationContext)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,6 +29,11 @@ class SettingsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val binding = FragmentSettingsBinding.inflate(inflater)
+//        if (myActivity != null) {
+//
+//        }
+//        private val songNotificationManager = SongNotificationManager(activity.applicationContext)
+//        songNotificationManager = SongNotificationManager(container.context)
         with(binding) {
 
             btProfile.setOnClickListener{
@@ -33,6 +46,10 @@ class SettingsFragment : Fragment() {
 
             btStats.setOnClickListener{
                 navController.navigate(R.id.statsFragment)
+            }
+
+            btNotification.setOnClickListener{
+                songNotificationManager.publishSongNotification()
             }
         }
 
