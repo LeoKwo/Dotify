@@ -1,4 +1,4 @@
-# INFO 448 Homework 4 - Application, JSON parsing & Network Requests
+# INFO 448 Homework 5 - Application, JSON parsing & Network Requests
 ## Leo Kwo
 **Description**
 This app is a mockup music player. It randomlly generates a number of songs played in the beginning which adds one every time the user clicks on the play button. It also responds to the user's button presses and text entry.
@@ -9,17 +9,26 @@ In homework 3, I implemented landscape views for the player and the list of song
 
 In homework 4, I added the ability to store and retrieve data from the Application object. The app is now also capabale of fetching and parsing json from the internet. The songlistactivity also now supports swipe to refresh.
 
+In homework 5, I added the functionality to toggle on and off Notification for new songs. When toggled on, the app will push a new notification that tells the user that a new song is released by some artist. When the user clicks on the notification, the app will open up the player.
+
 
 **Extra credit attempted**
-- SongListActivity with swipe to refresh.
+- FOR DOTIFY project ONLY: In requirement 2.b.v.2, tapping the notification should launch PlayerActivity that passes the song data to the activity to show the song in the player (+1)
 
 **Running in the emulator**
-![demo](img/in_sim_4_1.png)
-![demo](img/in_sim_4_2.png)
-![demo](img/in_sim_4_3.png)
-![demo](img/in_sim_4_4.png)
-![demo](img/in_sim_4_5.png)
-![demo](img/in_sim_4_6.png)
-![demo](img/in_sim_4_7.png)
+Settings Page:
+![demo](img/in_sim_5_1.jpg)
+
+Notification Turned On:
+![demo](img/in_sim_5_2.jpg)
+
+First Notification:
+![demo](img/in_sim_5_3.jpg)
+
+After Clicking on the Notification:
+![demo](img/in_sim_5_4.jpg)
+
+2nd Notification (after ~20 min):
+![demo](img/in_sim_5_5.jpg)
 
 **May need to build several times before the app can run properly...**

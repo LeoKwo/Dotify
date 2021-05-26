@@ -7,6 +7,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.*
@@ -52,6 +53,13 @@ class SongNotificationManager (
                 .build()
 
         workManager.enqueue(requestNotification)
+    }
+
+    fun stopRepetitiveSongNotification() {
+        if (isRepetitiveSongNotificationRunning()) {
+            workManager.cancelAllWorkByTag(NEW_UPLOADED_MUSIC_TAG)
+            Log.i("Notification Stop", "is stopped.")
+        }
     }
 
 //    private fun stopRepetitiveNotification
@@ -132,7 +140,6 @@ class SongNotificationManager (
     }
 
     fun updateLibrary(library: Library) {
-
         this.library  = library
     }
 }

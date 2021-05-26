@@ -77,9 +77,9 @@ class PlayerActivity : AppCompatActivity() {
         val notifiedTitle = intent.getStringExtra(NEW_UPLOADED_MUSIC_TITLE_KEY)
         val notifiedArtist = intent.getStringExtra(NEW_UPLOADED_MUSIC_ARTIST_KEY)
         val notifiedLargeImage = intent.getIntExtra(NEW_UPLOADED_MUSIC_LARGE_IMAGE_KEY, 0)
-        val notifiedSmallImage = intent.getIntExtra(NEW_UPLOADED_MUSIC_SMALL_IMAGE_KEY, 0)
+//        val notifiedSmallImage = intent.getIntExtra(NEW_UPLOADED_MUSIC_SMALL_IMAGE_KEY, 0)
         val id = intent.getStringExtra(NEW_UPLOADED_MUSIC_ID)
-        val duration = intent.getIntExtra(NEW_UPLOADED_MUSIC_DURATION, 0)
+//        val duration = intent.getIntExtra(NEW_UPLOADED_MUSIC_DURATION, 0)
 
 //        val newSong = intent.getBundleExtra(NEW_UPLOADED_MUSIC_KEY)
 
@@ -117,7 +117,7 @@ class PlayerActivity : AppCompatActivity() {
 
             // When there is a song playing
             if (selectedSong != null) {
-                val count = counter[selectedSong?.title]
+                val count = counter[selectedSong.title]
                 if (count != null) {
                     playCount = count
                 } else {

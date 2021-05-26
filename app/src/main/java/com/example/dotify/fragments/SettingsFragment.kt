@@ -54,8 +54,17 @@ class SettingsFragment : Fragment() {
 //            }
 
             // This was working
-            btNotification.setOnClickListener{
-                songNotificationManager.repetitiveSongNotification()
+//            btNotification.setOnClickListener{
+//                songNotificationManager.repetitiveSongNotification()
+//            }
+
+
+            switchNotification.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    songNotificationManager.repetitiveSongNotification()
+                } else {
+                    songNotificationManager.stopRepetitiveSongNotification()
+                }
             }
         }
 
